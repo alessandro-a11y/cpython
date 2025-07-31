@@ -1,7 +1,11 @@
 contact_links:
-  - name: "Getting help"
-    about: "Ask questions about using Python and debugging errors on Discourse."
+  - name: "📚 Getting Help"
     url: "https://discuss.python.org/c/users/7"
-  - name: "Proposing new features"
-    about: "Submit major feature proposal (e.g. syntax changes) to an ideas forum first."
+    about: >
+      Pergunte dúvidas sobre o uso do Python, erros comuns e resolução de bugs.
+      Use o fórum Discourse da comunidade para isso.
+
+  - name: "💡 Proposing New Features"
     url: "https://discuss.python.org/c/ideas/6"
+    about: >
+      Para grandes sugestões (como mudanças na linguagem ou recursos), primeiro publique sua ideia no fórum de ideias do Discourse.
