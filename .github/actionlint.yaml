@@ -1,11 +1,15 @@
 self-hosted-runner:
-  # Pending https://github.com/rhysd/actionlint/issues/533
-  labels: ["windows-11-arm"]
+  # Pending fix for https://github.com/rhysd/actionlint/issues/533
+  labels:
+    - "windows-11-arm"
 
 config-variables: null
 
 paths:
-  .github/workflows/**/*.yml:
-     ignore:
-     - 1st argument of function call is not assignable
-     - SC2(015|038|086|091|097|098|129|155)
+  ".github/workflows/**/*.yml":
+    ignore:
+      # Ignorar aviso: "1st argument of function call is not assignable"
+      - "1st argument of function call is not assignable"
+
+      # Ignorar os seguintes códigos SC2, agrupados por regex para clareza
+      - SC2(015|038|086|091|097|098|129|155)
