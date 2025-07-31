@@ -1,13 +1,11 @@
 # See https://help.github.com/articles/about-codeowners/
-# for more info about CODEOWNERS file
+# Uses the same pattern rules as gitignore: https://git-scm.com/docs/gitignore#_pattern_format
 
-# It uses the same pattern rule for gitignore file
-# https://git-scm.com/docs/gitignore#_pattern_format
-
-# GitHub
+# -------------------------
+# GitHub workflows and config
 .github/**                    @ezio-melotti @hugovk @AA-Turner
 
-# pre-commit
+# pre-commit configuration
 .pre-commit-config.yaml       @hugovk @AlexWaygood
 .ruff.toml                    @hugovk @AlexWaygood @AA-Turner
 
@@ -16,18 +14,19 @@ configure*                    @erlend-aasland @corona10
 Makefile.pre.in               @erlend-aasland
 Modules/Setup*                @erlend-aasland
 
+# Core libraries and modules by feature
 # argparse
 **/*argparse*                 @savannahostrowski
 
 # asyncio
 **/*asyncio*                  @1st1 @asvetlov @kumaraditya303 @willingc
 
-# Core
+# Core objects
 **/*context*                  @1st1
 **/*genobject*                @markshannon
 **/*hamt*                     @1st1
 **/*jit*                      @brandtbucher @savannahostrowski @diegorusso
-Python/perf_jit_trampoline.c  # Exclude the owners of "**/*jit*", above.
+Python/perf_jit_trampoline.c  # Excluded from above jit owners
 Objects/set*                  @rhettinger
 Objects/dict*                 @methane @markshannon
 Objects/typevarobject.c       @JelleZijlstra
@@ -37,6 +36,8 @@ Objects/codeobject.c          @markshannon
 Objects/frameobject.c         @markshannon
 Objects/call.c                @markshannon
 Objects/object.c              @ZeroIntensity
+
+# Python interpreter internals
 Python/ceval*.c               @markshannon
 Python/ceval*.h               @markshannon
 Python/codegen.c              @markshannon @iritkatriel
@@ -45,22 +46,30 @@ Python/assemble.c             @markshannon @iritkatriel
 Python/flowgraph.c            @markshannon @iritkatriel
 Python/instruction_sequence.c @iritkatriel
 Python/bytecodes.c            @markshannon
+
+# Optimizer modules
 Python/optimizer*.c           @markshannon
 Python/optimizer_analysis.c   @Fidget-Spinner @tomasr8
 Python/optimizer_bytecodes.c  @Fidget-Spinner @tomasr8
 Python/optimizer_symbols.c    @tomasr8
+
+# Symbol table
 Python/symtable.c             @JelleZijlstra @carljm
+
+# REPL and tests
 Lib/_pyrepl/*                 @pablogsal @lysnikolaou @ambv
 Lib/test/test_patma.py        @brandtbucher
 Lib/test/test_type_*.py       @JelleZijlstra
 Lib/test/test_capi/test_misc.py  @markshannon
 Lib/test/test_pyrepl/*        @pablogsal @lysnikolaou @ambv
+
+# Tools
 Tools/c-analyzer/             @ericsnowcurrently
 
-# dbm
-**/*dbm*                      @corona10 @erlend-aasland @serhiy-storchaka
+# Database modules
+**/*dbm*                     @corona10 @erlend-aasland @serhiy-storchaka
 
-# Doc/ tools
+# Documentation and docs tools
 Doc/conf.py                   @AA-Turner @hugovk
 Doc/Makefile                  @AA-Turner @hugovk
 Doc/make.bat                  @AA-Turner @hugovk
@@ -68,7 +77,7 @@ Doc/requirements.txt          @AA-Turner @hugovk
 Doc/_static/**                @AA-Turner @hugovk
 Doc/tools/**                  @AA-Turner @hugovk
 
-# runtime state/lifecycle
+# Runtime internals and lifecycle
 **/*pylifecycle*              @ericsnowcurrently @ZeroIntensity
 **/*pystate*                  @ericsnowcurrently @ZeroIntensity
 **/*preconfig*                @ericsnowcurrently
@@ -77,30 +86,21 @@ Doc/tools/**                  @AA-Turner @hugovk
 **/*sysmodule*                @ericsnowcurrently
 **/*bltinmodule*              @ericsnowcurrently
 **/*gil*                      @ericsnowcurrently
-Include/internal/pycore_runtime.h   @ericsnowcurrently
-Include/internal/pycore_interp.h    @ericsnowcurrently
-Include/internal/pycore_tstate.h    @ericsnowcurrently
-Include/internal/pycore_*_state.h   @ericsnowcurrently
-Include/internal/pycore_*_init.h    @ericsnowcurrently
-Include/internal/pycore_atexit.h    @ericsnowcurrently
-Include/internal/pycore_freelist.h  @ericsnowcurrently
-Include/internal/pycore_global_objects.h  @ericsnowcurrently
-Include/internal/pycore_obmalloc.h  @ericsnowcurrently
-Include/internal/pycore_pymem.h     @ericsnowcurrently
+
+Include/internal/pycore_*.h   @ericsnowcurrently
 Include/internal/pycore_stackref.h  @Fidget-Spinner
+
 Modules/main.c                @ericsnowcurrently
 Programs/_bootstrap_python.c  @ericsnowcurrently
 Programs/python.c             @ericsnowcurrently
 Tools/build/generate_global_objects.py  @ericsnowcurrently
 
-# Initialization
+# Initialization docs
 Doc/library/sys_path_init.rst @FFY00
 Doc/c-api/init_config.rst     @FFY00
 
-# getpath
+# Path config
 **/*getpath*                  @FFY00
-
-# site
 **/*site.py                   @FFY00
 Doc/library/site.rst          @FFY00
 
@@ -108,7 +108,7 @@ Doc/library/site.rst          @FFY00
 Lib/test/test_except*.py      @iritkatriel
 Objects/exceptions.c          @iritkatriel
 
-# Hashing & cryptographic primitives
+# Cryptography and hashing
 **/*hashlib*                  @gpshead @tiran @picnixz
 **/*hashopenssl*              @gpshead @tiran @picnixz
 **/*pyhash*                   @gpshead @tiran @picnixz
@@ -118,25 +118,25 @@ Modules/*sha*                 @gpshead @tiran @picnixz
 Modules/_hacl/**              @gpshead @picnixz
 **/*hmac*                     @gpshead @picnixz
 
-# libssl
+# SSL and networking
 **/*ssl*                      @gpshead @picnixz
 
-# logging
+# Logging
 **/*logging*                  @vsajip
 
-# venv
+# Virtual environments
 **/*venv*                     @vsajip @FFY00
 
 # Launcher
 /PC/launcher.c                @vsajip
 
-# HTML
+# HTML files
 /Lib/html/                    @ezio-melotti
 /Lib/_markupbase.py           @ezio-melotti
 /Lib/test/test_html*.py       @ezio-melotti
 /Tools/build/parse_html5_entities.py   @ezio-melotti
 
-# Import (including importlib).
+# Imports and importlib
 **/*import*                   @brettcannon @ericsnowcurrently @ncoghlan @warsaw
 /Python/import.c              @kumaraditya303
 Python/dynload_*.c            @ericsnowcurrently
@@ -153,7 +153,7 @@ Python/dynload_*.c            @ericsnowcurrently
 Lib/test/test_module/         @ericsnowcurrently
 Doc/c-api/module.rst          @ericsnowcurrently
 **/*importlib/resources/*     @jaraco @warsaw @FFY00
-**/*importlib/metadata/*       @jaraco @warsaw
+**/*importlib/metadata/*      @jaraco @warsaw
 
 # Dates and times
 **/*datetime*                 @pganssle @abalkin
@@ -165,184 +165,184 @@ Python/pytime.c               @pganssle @abalkin
 Include/internal/pycore_time.h  @pganssle @abalkin
 
 # Email and related
-**/*mail*                     @python/email-team
-**/*smtp*                     @python/email-team
-**/*mime*                     @python/email-team
-**/*imap*                     @python/email-team
-**/*poplib*                   @python/email-team
+**/*mail*                    @python/email-team
+**/*smtp*                    @python/email-team
+**/*mime*                    @python/email-team
+**/*imap*                    @python/email-team
+**/*poplib*                  @python/email-team
 
-# Exclude .mailmap from being owned by @python/email-team
+# Exclude .mailmap from ownership by email team
 /.mailmap
 
 # Garbage collector
-/Modules/gcmodule.c           @pablogsal
-/Doc/library/gc.rst           @pablogsal
+/Modules/gcmodule.c          @pablogsal
+/Doc/library/gc.rst          @pablogsal
 
-# Parser
-/Parser/                      @pablogsal @lysnikolaou
-/Tools/peg_generator/         @pablogsal @lysnikolaou
-/Lib/test/test_peg_generator/ @pablogsal @lysnikolaou
-/Grammar/python.gram          @pablogsal @lysnikolaou
-/Lib/tokenize.py              @pablogsal @lysnikolaou
-/Lib/test/test_tokenize.py    @pablogsal @lysnikolaou
+# Parser and PEG generator
+/Parser/                     @pablogsal @lysnikolaou
+/Tools/peg_generator/        @pablogsal @lysnikolaou
+/Lib/test/test_peg_generator/@pablogsal @lysnikolaou
+/Grammar/python.gram         @pablogsal @lysnikolaou
+/Lib/tokenize.py             @pablogsal @lysnikolaou
+/Lib/test/test_tokenize.py   @pablogsal @lysnikolaou
 
 # Code generator
-/Tools/cases_generator/        @markshannon
+/Tools/cases_generator/      @markshannon
 
-# AST
-Python/ast.c                  @isidentical @JelleZijlstra @eclips4 @tomasr8
-Python/ast_preprocess.c       @isidentical @eclips4 @tomasr8
-Parser/asdl.py                @isidentical @JelleZijlstra @eclips4 @tomasr8
-Parser/asdl_c.py              @isidentical @JelleZijlstra @eclips4 @tomasr8
-Lib/ast.py                    @isidentical @JelleZijlstra @eclips4 @tomasr8
-Lib/_ast_unparse.py           @isidentical @JelleZijlstra @eclips4 @tomasr8
-Lib/test/test_ast/            @eclips4 @tomasr8
+# AST and preprocessors
+Python/ast.c                 @isidentical @JelleZijlstra @eclips4 @tomasr8
+Python/ast_preprocess.c      @isidentical @eclips4 @tomasr8
+Parser/asdl.py               @isidentical @JelleZijlstra @eclips4 @tomasr8
+Parser/asdl_c.py             @isidentical @JelleZijlstra @eclips4 @tomasr8
+Lib/ast.py                   @isidentical @JelleZijlstra @eclips4 @tomasr8
+Lib/_ast_unparse.py          @isidentical @JelleZijlstra @eclips4 @tomasr8
+Lib/test/test_ast/           @eclips4 @tomasr8
 
 # Mock
-/Lib/unittest/mock.py         @cjw296
+/Lib/unittest/mock.py        @cjw296
 /Lib/test/test_unittest/testmock/* @cjw296
 
 # multiprocessing
-**/*multiprocessing*          @gpshead
+**/*multiprocessing*         @gpshead
 
 # SQLite 3
-**/*sqlite*                   @berkerpeksag @erlend-aasland
+**/*sqlite*                  @berkerpeksag @erlend-aasland
 
 # subprocess
-/Lib/subprocess.py            @gpshead
-/Lib/test/test_subprocess.py  @gpshead
-/Modules/*subprocess*         @gpshead
+/Lib/subprocess.py           @gpshead
+/Lib/test/test_subprocess.py @gpshead
+/Modules/*subprocess*        @gpshead
 
 # debugger
-**/*pdb*                      @gaogaotiantian
-**/*bdb*                      @gaogaotiantian
+**/*pdb*                     @gaogaotiantian
+**/*bdb*                     @gaogaotiantian
 
 # Limited C API & stable ABI
-Tools/build/stable_abi.py     @encukou
-Misc/stable_abi.toml          @encukou
-Doc/data/*.abi                @encukou
-Doc/c-api/stable.rst          @encukou
+Tools/build/stable_abi.py    @encukou
+Misc/stable_abi.toml         @encukou
+Doc/data/*.abi               @encukou
+Doc/c-api/stable.rst         @encukou
 
 # Windows
-/PC/                          @python/windows-team
-/PCbuild/                     @python/windows-team
+/PC/                         @python/windows-team
+/PCbuild/                    @python/windows-team
 
 # Urllib
-**/*robotparser*              @berkerpeksag
+**/*robotparser*             @berkerpeksag
 
 # Windows installer packages
-/Tools/msi/                   @python/windows-team
-/Tools/nuget/                 @python/windows-team
+/Tools/msi/                  @python/windows-team
+/Tools/nuget/                @python/windows-team
 
-# Misc
-**/*itertools*                @rhettinger
-**/*collections*              @rhettinger
-**/*random*                   @rhettinger
-**/*bisect*                   @rhettinger
-**/*heapq*                    @rhettinger
-**/*functools*                @rhettinger
+# Misc standard libraries
+**/*itertools*               @rhettinger
+**/*collections*             @rhettinger
+**/*random*                  @rhettinger
+**/*bisect*                  @rhettinger
+**/*heapq*                   @rhettinger
+**/*functools*               @rhettinger
 
-**/*dataclasses*              @ericvsmith
+**/*dataclasses*             @ericvsmith
 
-**/*ensurepip*                @pfmoore @pradyunsg
+**/*ensurepip*               @pfmoore @pradyunsg
 
-/Doc/library/idle.rst         @terryjreedy
-**/*idlelib*                  @terryjreedy
-**/*turtledemo*               @terryjreedy
+/Doc/library/idle.rst        @terryjreedy
+**/*idlelib*                 @terryjreedy
+**/*turtledemo*              @terryjreedy
 
-**/*annotationlib*            @JelleZijlstra
-**/*typing*                   @JelleZijlstra @AlexWaygood
+**/*annotationlib*           @JelleZijlstra
+**/*typing*                  @JelleZijlstra @AlexWaygood
 
-**/*ftplib                    @giampaolo
-**/*shutil                    @giampaolo
+**/*ftplib                   @giampaolo
+**/*shutil                   @giampaolo
 
-**/*enum*                     @ethanfurman
-**/*cgi*                      @ethanfurman
-**/*tarfile*                  @ethanfurman
+**/*enum*                    @ethanfurman
+**/*cgi*                     @ethanfurman
+**/*tarfile*                 @ethanfurman
 
-**/*tomllib*                  @encukou @hauntsaninja
+**/*tomllib*                 @encukou @hauntsaninja
 
-**/*sysconfig*                @FFY00
+**/*sysconfig*               @FFY00
 
-**/*cjkcodecs*                @corona10
+**/*cjkcodecs*               @corona10
 
 # macOS
-/Mac/                         @python/macos-team
-**/*osx_support*              @python/macos-team
+/Mac/                        @python/macos-team
+**/*osx_support*             @python/macos-team
 
 # pathlib
-**/*pathlib*                  @barneygale
+**/*pathlib*                 @barneygale
 
 # zipfile.Path
-**/*zipfile/_path/*           @jaraco
+**/*zipfile/_path/*          @jaraco
 
 # Argument Clinic
-/Tools/clinic/**              @erlend-aasland
-/Lib/test/test_clinic.py      @erlend-aasland
-Doc/howto/clinic.rst          @erlend-aasland
+/Tools/clinic/**             @erlend-aasland
+/Lib/test/test_clinic.py     @erlend-aasland
+Doc/howto/clinic.rst         @erlend-aasland
 
 # Subinterpreters
-**/*interpreteridobject.*     @ericsnowcurrently
-**/*crossinterp*              @ericsnowcurrently
-Modules/_interp*module.c      @ericsnowcurrently
-Lib/test/test__interp*.py     @ericsnowcurrently
-Lib/concurrent/interpreters/  @ericsnowcurrently
-Lib/test/support/channels.py  @ericsnowcurrently
-Doc/library/concurrent.interpreters.rst  @ericsnowcurrently
-Lib/test/test_interpreters/   @ericsnowcurrently
-Lib/concurrent/futures/interpreter.py  @ericsnowcurrently
+**/*interpreteridobject.*    @ericsnowcurrently
+**/*crossinterp*             @ericsnowcurrently
+Modules/_interp*module.c     @ericsnowcurrently
+Lib/test/test__interp*.py    @ericsnowcurrently
+Lib/concurrent/interpreters/ @ericsnowcurrently
+Lib/test/support/channels.py @ericsnowcurrently
+Doc/library/concurrent.interpreters.rst @ericsnowcurrently
+Lib/test/test_interpreters/  @ericsnowcurrently
+Lib/concurrent/futures/interpreter.py @ericsnowcurrently
 
 # Android
-**/*Android*                  @mhsmith @freakboy3742
-**/*android*                  @mhsmith @freakboy3742
+**/*Android*                 @mhsmith @freakboy3742
+**/*android*                 @mhsmith @freakboy3742
 
-# iOS (but not termios)
-**/iOS*                       @freakboy3742
-**/ios*                       @freakboy3742
-**/*_iOS*                     @freakboy3742
-**/*_ios*                     @freakboy3742
-**/*-iOS*                     @freakboy3742
-**/*-ios*                     @freakboy3742
+# iOS (except termios)
+/**/iOS*                    @freakboy3742
+/**/ios*                    @freakboy3742
+**/*_iOS*                   @freakboy3742
+**/*_ios*                   @freakboy3742
+**/*-iOS*                   @freakboy3742
+**/*-ios*                   @freakboy3742
 
 # WebAssembly
-Tools/wasm/config.site-wasm32-emscripten  @freakboy3742
-/Tools/wasm/README.md         @brettcannon @freakboy3742
-/Tools/wasm/wasi-env          @brettcannon
-/Tools/wasm/wasi.py           @brettcannon
-/Tools/wasm/emscripten        @freakboy3742
-/Tools/wasm/wasi              @brettcannon
+Tools/wasm/config.site-wasm32-emscripten @freakboy3742
+/Tools/wasm/README.md        @brettcannon @freakboy3742
+/Tools/wasm/wasi-env         @brettcannon
+/Tools/wasm/wasi.py          @brettcannon
+/Tools/wasm/emscripten       @freakboy3742
+/Tools/wasm/wasi             @brettcannon
 
 # SBOM
-/Misc/externals.spdx.json     @sethmlarson
-/Misc/sbom.spdx.json          @sethmlarson
+/Misc/externals.spdx.json    @sethmlarson
+/Misc/sbom.spdx.json         @sethmlarson
 /Tools/build/generate_sbom.py @sethmlarson
 
 # Config Parser
-Lib/configparser.py           @jaraco
+Lib/configparser.py          @jaraco
 Lib/test/test_configparser.py @jaraco
 
 # Doc sections
-Doc/reference/                @willingc @AA-Turner
+Doc/reference/               @willingc @AA-Turner
 
-**/*weakref*                  @kumaraditya303
+**/*weakref*                 @kumaraditya303
 
 # Colorize
-Lib/_colorize.py              @hugovk
-Lib/test/test__colorize.py    @hugovk
+Lib/_colorize.py             @hugovk
+Lib/test/test__colorize.py   @hugovk
 
 # Fuzzing
-Modules/_xxtestfuzz/          @ammaraskar
+Modules/_xxtestfuzz/         @ammaraskar
 
 # t-strings
-**/*interpolationobject*      @lysnikolaou
-**/*templateobject*           @lysnikolaou
-**/*templatelib*              @lysnikolaou
-**/*tstring*                  @lysnikolaou
+**/*interpolationobject*     @lysnikolaou
+**/*templateobject*          @lysnikolaou
+**/*templatelib*             @lysnikolaou
+**/*tstring*                 @lysnikolaou
 
 # Remote debugging
-Python/remote_debug.h         @pablogsal
-Python/remote_debugging.c     @pablogsal
+Python/remote_debug.h        @pablogsal
+Python/remote_debugging.c    @pablogsal
 Modules/_remote_debugging_module.c @pablogsal @ambv @1st1
 
 # gettext
-**/*gettext*                  @tomasr8
+**/*gettext*                 @tomasr8
