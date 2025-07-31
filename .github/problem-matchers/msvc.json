@@ -1,19 +1,30 @@
 {
-    "__comment": "Taken from vscode's vs/workbench/contrib/tasks/common/problemMatcher.ts msCompile rule",
-    "problemMatcher": [
-      {
-        "owner": "msvc-problem-matcher",
-        "pattern": [
-          {
-            "regexp": "^(?:\\s+\\d+\\>)?([^\\s].*)\\((\\d+),?(\\d+)?(?:,\\d+,\\d+)?\\)\\s*:\\s+(error|warning|info)\\s+(\\w{1,2}\\d+)\\s*:\\s*(.*)$",
-            "file": 1,
-            "line": 2,
-            "column": 3,
-            "severity": 4,
-            "code": 5,
-            "message": 6
-          }
-        ]
+  "__comment": "Melhorado a partir do vscode's msCompile problemMatcher",
+  "problemMatcher": [
+    {
+      "owner": "msvc",
+      "fileLocation": ["relative", "${workspaceFolder}"],
+      "pattern": [
+        {
+          "regexp": "^(?:\\s+\\d+\\>)?([^\\s].*)\\((\\d+),?(\\d+)?(?:,\\d+,\\d+)?\\)\\s*:\\s+(error|warning|info)\\s+(\\w{1,2}\\d+)\\s*:\\s*(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "code": 5,
+          "message": 6
+        },
+        {
+          "regexp": "^\\s+(.*)$",
+          "message": 1,
+          "loop": true
+        }
+      ],
+      "severity": {
+        "error": "error",
+        "warning": "warning",
+        "info": "info"
       }
-    ]
-  }
+    }
+  ]
+}
