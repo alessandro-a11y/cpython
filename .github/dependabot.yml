@@ -1,4 +1,5 @@
 version: 2
+
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
@@ -12,6 +13,7 @@ updates:
         update-types:
           - "version-update:semver-minor"
           - "version-update:semver-patch"
+
   - package-ecosystem: "pip"
     directory: "/Tools/"
     schedule:
