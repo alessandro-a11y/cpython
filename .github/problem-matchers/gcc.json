@@ -1,18 +1,28 @@
 {
-    "__comment": "Taken from vscode-cpptools's Extension/package.json gcc rule",
-    "problemMatcher": [
+  "__comment": "Melhorado a partir do vscode-cpptools's Extension/package.json gcc problem matcher",
+  "problemMatcher": [
+    {
+      "owner": "gcc",
+      "fileLocation": ["relative", "${workspaceFolder}"],
+      "pattern": [
         {
-            "owner": "gcc-problem-matcher",
-            "pattern": [
-                {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(?:fatal\\s+)?(warning|error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            ]
+          "regexp": "^(.*?):(\\d+):(\\d+):\\s+(fatal\\s+)?(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 5,
+          "message": 6
+        },
+        {
+          "regexp": "^\\s+(.*)$",
+          "message": 1,
+          "loop": true
         }
-    ]
+      ],
+      "severity": {
+        "warning": "warning",
+        "error": "error"
+      }
+    }
+  ]
 }
