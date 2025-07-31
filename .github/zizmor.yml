@@ -1,10 +1,12 @@
-# Configuration for the zizmor static analysis tool, run via pre-commit in CI
-# https://woodruffw.github.io/zizmor/configuration/
+# Configuration for the Zizmor static analysis tool (https://woodruffw.github.io/zizmor/configuration/)
+# Typically run via pre-commit in CI pipelines
+
 rules:
   dangerous-triggers:
     ignore:
-      - documentation-links.yml
+      - documentation-links.yml  # Ignorar avisos em arquivo específico
+
   unpinned-uses:
     config:
       policies:
-        "*": ref-pin
+        "*": ref-pin  # Aplicar política 'ref-pin' para todas as dependências
